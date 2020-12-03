@@ -1,0 +1,83 @@
+.element {
+    margin: 5px;
+}
+
+.element:hover {
+    transform: scale(1.2);
+    z-index: 999;
+    box-shadow: 1px 1px 11px 0 rgb(83, 83, 83);
+    cursor: pointer;
+}
+
+.nonmetal {
+    background-color: yellowgreen;
+}
+
+.noble-gas {
+    background-color: teal;
+}
+
+.alkali-metal {
+    background-color: cyan;
+}
+
+.alkaline-earth-metal {
+    background-color: aquamarine;
+}
+
+.metalloid {
+    background-color: burlywood; 
+}  
+
+.halogen {
+    background-color: green;
+}
+
+.metal {
+    background-color: blue;
+    color: aliceblue;
+}
+
+.transition-metal {
+    background-color: cadetblue;
+
+}
+.post-transition-metal {
+    background-color: #fff;
+}
+
+.actinoid {
+    background-color: purple;
+    color: aliceblue;
+}
+
+.lanthanoid {
+    background-color: purple;
+    color: aliceblue;
+}
+
+
+#loader {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    position: relative;
+    top: 150px;
+  }
+
+ 
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
