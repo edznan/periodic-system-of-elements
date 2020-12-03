@@ -43,6 +43,10 @@ document.addEventListener('click', (e) => {
         fillInModal(e.target.id)
         $("#elementModal").modal()
     }
+    if (e.target.parentNode.classList.contains('element')) {
+        fillInModal(e.target.parentNode.id)
+        $("#elementModal").modal()
+    }
 })
 
 fillInModal = (id) => {
