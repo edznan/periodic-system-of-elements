@@ -1,27 +1,26 @@
-let elementsArr = []
-let container = document.querySelector('#periodic')
-let loading = document.querySelector('#loader')
+let elementsArr = [];
+let container = document.querySelector("#periodic");
+let loading = document.querySelector("#loader");
 
-getElements = async () => {
-    loading.classList.remove('hidden')
-    container.classList.add('hidden')
-    let api = 'elements.json'
-    let raw = await fetch(api)
-    if (raw.ok) {
-        elementsArr = await raw.json()
-        displayElements()
-    }
+async function getElements() {
+  loading.classList.remove("hidden");
+  container.classList.add("hidden");
+  let api = "elements.json";
+  let raw = await fetch(api);
+  if (raw.ok) {
+    elementsArr = await raw.json();
+    displayElements();
+  }
 }
 
-getElements()
+getElements();
 
-let htmlToInsert = ''
-let elementClass = ''
-
-displayElements = () => {
-    elementsArr.map(element => {
-        elementClass = element.groupBlock.replace(/\s+/g, "-")
-        let html = `
+function displayElements() {
+  let html = "";
+  let elementClass = "";
+  elementsArr.map((element) => {
+    elementClass = element.groupBlock.replace(/\s+/g, "-");
+    html += `
         <div class="col-sm-2 element ${elementClass}" id="${element.name}">
             <small>${element.atomicNumber}</small>
             <br>
@@ -30,26 +29,30 @@ displayElements = () => {
             <h5>${element.name}</h5>
             <hr>
         </div>
-        `
-        htmlToInsert += html
-        loading.classList.add('hidden')
-        container.innerHTML = htmlToInsert
-        container.classList.remove('hidden')
-    })
+        `;
+    container.innerHTML = html;
+    loading.classList.add("hidden");
+    container.classList.remove("hidden");
+  });
 }
 
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('element')) {
-        fillInModal(e.target.id)
-        $("#elementModal").modal()
-    }
-})
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("element")) {
+    fillInModal(e.target.id);
+    $("#elementModal").modal();
+  }
+  if (e.target.parentNode.classList.contains("element")) {
+    fillInModal(e.target.parentNode.id);
+    $("#elementModal").modal();
+  }
+});
 
-fillInModal = (id) => {
-    elementsArr.forEach(element => {
-        if (element.name == id) {
-            document.querySelector('#modalTitle').innerHTML = element.name + ' (' + element.symbol +')'
-            document.querySelector('#modalBody').innerHTML = `
+function fillInModal(id) {
+  elementsArr.forEach((element) => {
+    if (element.name == id) {
+      document.querySelector("#modalTitle").innerHTML =
+        element.name + " (" + element.symbol + ")";
+      document.querySelector("#modalBody").innerHTML = `
             <ul class="list-group">
                 <li class="list-group-item">Atomic mass: ${element.atomicMass}</li>
                 <li class="list-group-item">Atomic number: ${element.atomicNumber}</li>
@@ -67,7 +70,7 @@ fillInModal = (id) => {
                 <li class="list-group-item">Standard state: ${element.standardState}</li>
                 <li class="list-group-item">Discovered: ${element.yearDiscovered}</li>
             </ul>
-            `
-        }
-    })
+            `;
+    }
+  });
 }
